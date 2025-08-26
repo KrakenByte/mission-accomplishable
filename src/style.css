@@ -1,0 +1,482 @@
+:root {
+  --bg-color: #e0e0e0;
+  --text-color: #333;
+
+  --panel-bg: #ffffff; /* shared panel bg for sidebar/content */
+  --panel-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  --panel-radius: 1rem;
+
+  --task-bg: #f5f5f5; /* darker task cards (restored) */
+
+  --button-hover: #ececec; /* flat button hover */
+
+  --status-pending-bg: #fff3cd;
+  --status-pending-text: #856404;
+
+  --status-in-progress-bg: #cce5ff;
+  --status-in-progress-text: #004085;
+
+  --status-done-bg: #d4edda;
+  --status-done-text: #155724;
+
+  --priority-high: #dc3545;
+  --priority-medium: #ffc107;
+  --priority-low: #28a745;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  height: 100vh;
+  gap: 2.5rem;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+.sidebar-container {
+  background-color: var(--panel-bg);
+  border-radius: var(--panel-radius);
+  box-shadow: var(--panel-shadow);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+}
+
+.projects-sidebar-section {
+  font-weight: bold;
+}
+
+.new-project-btn {
+  margin: 0 auto;
+  width: max-content;
+  border: rgba(0, 0, 0, 0.25) dashed 1px;
+}
+
+#content {
+  background-color: var(--panel-bg);
+  border-radius: var(--panel-radius);
+  box-shadow: var(--panel-shadow);
+  padding: 1.25rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+}
+
+.app-title {
+  padding: 0.75rem 1.25rem;
+  margin: 0 auto 1rem;
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  text-align: center;
+  width: max-content;
+  border-radius: 0.75rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.project-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-name {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  color: var(--text-color);
+}
+
+.project-desc {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.project-header,
+.add-task-form {
+  flex-shrink: 0;
+}
+
+button,
+.sort {
+  border: none;
+  background: none;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: background-color 0.15s ease;
+  font-size: 0.95rem;
+}
+button:hover,
+.sort:hover {
+  background-color: var(--button-hover);
+}
+
+.sort-container {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Task list */
+.task-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.task-container {
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  background-color: var(--task-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+}
+.task-title {
+  font-size: 1.05rem;
+  font-weight: 400;
+}
+
+.task-right {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.task-checkbox {
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-width: 2px;
+  border-radius: 6px;
+  opacity: 0.7;
+}
+
+.task-due-date {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+  cursor: pointer;
+  text-align: right;
+  font-style: italic;
+}
+
+
+/* Add task form */
+.add-task-form {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.add-task-form input {
+  width: 300px;
+  height: 2rem;
+  padding: 0.5rem;
+}
+
+.add-task-form > * {
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e6e6e6;
+  background: #fff;
+}
+
+.add-task-form select {
+  width: 100px;
+}
+
+/* Status labels */
+.status {
+  font-size: 0.85rem;
+  text-transform: capitalize;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.status:hover {
+  filter: brightness(95%);
+  cursor: pointer;
+}
+
+.status.pending {
+  background-color: var(--status-pending-bg);
+  color: var(--status-pending-text);
+}
+.status.in-progress {
+  background-color: var(--status-in-progress-bg);
+  color: var(--status-in-progress-text);
+}
+.status.done {
+  background-color: var(--status-done-bg);
+  color: var(--status-done-text);
+}
+
+/* Priority borders */
+.high-priority {
+  border-left: 8px solid var(--priority-high);
+}
+.medium-priority {
+  border-left: 8px solid var(--priority-medium);
+}
+.low-priority {
+  border-left: 8px solid var(--priority-low);
+  opacity: 0.95;
+}
+
+/* Sidebar project display */
+.sidebar-project-div {
+  margin-top: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.75rem;
+  background-color: var(--task-bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+}
+
+.sidebar-project-div:hover {
+  background-color: #f0f0f0; /* slightly lighter */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+
+.sidebar-project-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1;
+}
+
+.remove-project-btn {
+  font-size: 0.9rem;
+  line-height: 1;
+  padding: 0.2rem;
+  height: auto;
+  background: none;
+  border: none;
+  color: var(--priority-high);
+  cursor: pointer;
+  vertical-align: middle;
+  opacity: 0.6;
+}
+
+.remove-project-btn:hover {
+  opacity: 1;
+  background-color: var(--button-hover);
+}
+
+.sidebar-project-desc {
+  margin: 0.5rem 0 0;
+  font-size: 0.78rem;
+  color: #555;
+  line-height: 1.1;
+}
+
+/* Modal overlay */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Modal content */
+.modal-content {
+  background-color: var(--panel-bg);
+  border-radius: var(--panel-radius);
+  box-shadow: var(--panel-shadow);
+  width: 100%;
+  max-width: 400px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Modal title */
+.modal-content h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+  text-align: center;
+  color: var(--text-color);
+}
+
+/* Form groups */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.form-group input {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--text-color);
+}
+
+/* Buttons */
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.modal-buttons button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  font-size: 0.95rem;
+}
+
+.modal-buttons .cancel-btn {
+  background-color: #f1f1f1;
+  color: var(--text-color);
+}
+
+.modal-buttons .cancel-btn:hover {
+  background-color: var(--button-hover);
+}
+
+.modal-buttons button[type="submit"] {
+  background-color: var(--text-color);
+  color: var(--panel-bg);
+}
+
+.modal-buttons button[type="submit"]:hover {
+  background-color: #222;
+}
+
+/* No text selection utility */
+.unselectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+/* Styles for task edit button and its container */
+.task-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.task-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.edit-task-btn,
+.edit-project-btn {
+  font-size: 1rem;
+  padding: 0.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  opacity: 0.6;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+  line-height: 1;
+}
+
+.edit-task-btn:hover,
+.edit-project-btn:hover {
+  opacity: 1;
+  background-color: var(--button-hover);
+}
+
+/* Styles for project controls in sidebar */
+.sidebar-project-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+/* Generic select styling for modal */
+.form-group select {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  transition: border-color 0.15s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: var(--text-color);
+}

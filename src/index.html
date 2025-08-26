@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mission: Accomplishable</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="sidebar-container">
+      <div class="projects-sidebar-section">Projects</div>
+      <div class="project-list-container"></div>
+      <button class="new-project-btn">Create New Project</button>
+
+      <div class="modal" id="form-modal" style="display: none">
+        <div class="modal-content">
+          <h2 id="modal-title"></h2>
+          <form id="modal-form">
+            <div id="modal-form-fields"></div>
+            <div class="modal-buttons">
+              <button type="button" class="cancel-btn unselectable">
+                Cancel
+              </button>
+              <button type="submit" class="unselectable" id="modal-submit-btn">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="content">
+      <h1 class="app-title">Mission: Accomplishable</h1>
+    </div>
+
+    <script src="index.js" type="module"></script>
+  </body>
+</html>
