@@ -105,10 +105,6 @@ export function InitEventListeners() {
 
     // Edit Task
     if (e.target.classList.contains("edit-task-btn") && task) {
-      const dueDateValue = task.dueDate
-        ? task.dueDate.toISOString().split("T")[0]
-        : "";
-
       showFormModal({
         title: "Edit Task",
         submitText: "Update",

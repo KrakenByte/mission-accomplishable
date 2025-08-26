@@ -1,5 +1,5 @@
 import { Project } from "../models/project";
-import { format, formatDistanceToNow } from "date-fns";
+import {formatDistanceToNow } from "date-fns";
 
 export function renderProject(project) {
   Project.activeProject = project;
